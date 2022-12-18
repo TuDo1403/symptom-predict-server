@@ -13,7 +13,6 @@ def predict():
     if request.method == 'POST':
         req_data = request.get_json()
         inputs = req_data['inputs']
-        #return jsonify({'message': name})
     df_pivoted = pd.read_csv('data/data.csv')
     symptoms = df_pivoted.columns[1:].values
 
@@ -24,7 +23,5 @@ def predict():
     for symptom in user_symptoms:
         test_input[np.where(symptoms==symptom)[0][0]] = 1
 
-    # data = json.dumps({'results': model.predict([test_input]).tolist()}, indent=4, ensure_ascii=False)
     response = jsonify({'results': model.predict([test_input]).tolist()})
-    #response.headers.add('Access-Control-Allow-Origin', '*')
     return response
