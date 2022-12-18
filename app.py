@@ -25,3 +25,6 @@ def predict():
 
     response = jsonify({'results': model.predict([test_input]).tolist()})
     return response
+
+if __name__ == '__main__':
+    app.run()
