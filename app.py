@@ -1,6 +1,5 @@
 import pickle
 import numpy as np
-import pandas as pd
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -13,8 +12,7 @@ def predict():
     if request.method == 'POST':
         req_data = request.get_json()
         inputs = req_data['inputs']
-    df_pivoted = pd.read_csv('data/data.csv')
-    symptoms = df_pivoted.columns[1:].values
+    symptoms = pickle.load(open('data/symptoms.pickle','rb'))
 
     with open('data/NB_model.sav', 'rb') as input_file:
         model = pickle.load(input_file)
